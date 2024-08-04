@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head data-th-fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+    <link rel="icon" href="/images/book-logo.png">
+</head>
+
+<body>
+    <header data-th-fragment="header">
+        <h1>Book Store</h1>
+    </header>
+    <nav data-th-fragment="nav(url,title)">
+        <a data-th-href="${url}" data-th-text="${title}"></a>
+    </nav>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head data-th-replace="~{fragment :: head}"></head>
+
+<body>
+    <header data-th-replace="~{fragment :: header}"></header>
+    <main>
+        <nav data-th-replace="~{fragment :: nav('/home' , 'Back to Home')}"></nav>
+
+        <section>
+            <form action="/create-book" method="post">
+                <div>
+                    <label for="book-name">Book Name</label>
+                    <input type="text" id="book-name" name="bookName" placeholder="Ex : Java For Beggieers">
+                </div>
+                <div>
+                    <label for="book-author">Book Author</label>
+                    <input type="text" id="book-author" name="authorName"
+                        placeholder="Ex : Cracking In Coding Interview">
+                </div>
+                <div>
+                    <label for="total-page">Total Page</label>
+                    <input type="number" id="total-page" name="totalPage" placeholder="Ex : 415">
+                </div>
+                <div>
+                    <label for="publication-date">Publication Date</label>
+                    <input type="date" id="publication-date" name="publicationDate">
+                </div>
+                <div>
+                    <label for="paper-back">PaperBack</label>
+                    <input type="radio" name="bookFormat" id="paper-back" value="PAPERBACK">
+
+                    <label for="hard-cover">HardCover</label>
+                    <input type="radio" name="bookFormat" id="hard-cover" value="HARDCOVER">
+                </div>
+                <div>
+
+                    <label for="book-category">Book Category</label>
+                    <select name="category" id="book-category">
+                        <option value="sports">Sports</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="non-fiction">Non-Fiction</option>
+                        <option value="science">Science</option>
+                        <option value="history">History</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="amazon">Amazon</label>
+                    <input type="checkbox" id="amazon" name="availability" value="amazon">
+                    <label for="flipkart">Flipkart</label>
+                    <input type="checkbox" id="flipkart" name="availability" value="flipkart">
+                    <label for="offline">Offline Store</label>
+                    <input type="checkbox" id="offline" name="availability" value="offline">
+                </div>
+                <div>
+                    <label for="book-description">Book Description</label>
+                    <textarea name="description" id="book-description"></textarea>
+                </div>
+                <input type="submit">
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
