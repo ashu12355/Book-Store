@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head data-th-fragment="head">
+<head data-th-fragment="head(links)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Store</title>
     <link rel="icon" href="/images/book-logo.png">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/utility.css">
+
+    <link data-th-replace="${links}">
 </head>
 
 <body>
-    <header data-th-fragment="header">
+    <header data-th-fragment="header" class="flex-align-center-1">
+        <img src="/images/book-logo.png" alt="Book-Store-Logo" width="80px" height="80px">
         <h1>Book Store</h1>
     </header>
     <nav data-th-fragment="nav(url,title)">
