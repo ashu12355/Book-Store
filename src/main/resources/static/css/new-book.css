@@ -49,3 +49,11 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #35657a;
 }
+
+@media (max-width: 900px) {
+  .inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

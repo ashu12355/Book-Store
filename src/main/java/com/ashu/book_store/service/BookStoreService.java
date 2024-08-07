@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import com.ashu.book_store.dto.HomePageResponse;
 import com.ashu.book_store.model.BookStore;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,19 @@ public class BookStoreService {
                 bookStore.getCategory(),
                 listToCSV(bookStore.getAvailability()),
                 bookStore.getDescription());
+    }
+
+    public List<HomePageResponse> getBooksNameandId() {
+        String sql = "SELECT book_id , book_name FROM book_store";
+        return jdbcTemplate.query(sql, homePageRowMapper());
+    }
+
+    private RowMapper<HomePageResponse> homePageRowMapper() {
+        return (resultSet, rowNumber) -> {
+            int bookId = resultSet.getInt("book_id");
+            String bookName = resultSet.getString("book_name");
+            return new HomePageResponse(bookId, bookName);
+        };
     }
 
     private String listToCSV(List<String> list) {
