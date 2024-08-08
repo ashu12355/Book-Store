@@ -1,5 +1,9 @@
 package com.ashu.book_store.service;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,7 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import com.ashu.book_store.dto.BookDetailsResponse;
 import com.ashu.book_store.dto.HomePageResponse;
+import com.ashu.book_store.model.BookFormat;
 import com.ashu.book_store.model.BookStore;
 
 import lombok.RequiredArgsConstructor;
@@ -38,6 +44,40 @@ public class BookStoreService {
         return jdbcTemplate.query(sql, homePageRowMapper());
     }
 
+    public BookDetailsResponse getBook(int id) {
+        String sql = "SELECT * FROM book_store WHERE book_id = ? ";
+        return jdbcTemplate.queryForObject(sql, getBookDetailsRowMapper(), id);
+    }
+
+    private RowMapper<BookDetailsResponse> getBookDetailsRowMapper() {
+        return (resultSet, rowNumber) -> {
+            int bookId = resultSet.getInt("book_id");
+            String bookName = resultSet.getString("book_name");
+            String authorName = resultSet.getString("author_name");
+            int totalPage = resultSet.getInt("total_page");
+            String category = resultSet.getString("category");
+            Date publicationDate = resultSet.getDate("publication_date");
+            String bookFormat = resultSet.getString("book_format");
+            String availability = resultSet.getString("availabilty");
+            String description = resultSet.getString("book_description");
+
+            return new BookDetailsResponse(bookId,
+                    bookName,
+                    authorName,
+                    totalPage,
+                    category,
+                    sqlDateToLocalDate(publicationDate),
+                    BookFormat.valueOf(bookFormat),
+                    csvToList(availability),
+                    description);
+        };
+    }
+
+    private LocalDate sqlDateToLocalDate(Date date) {
+        var formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return LocalDate.parse(formatter.format(date));
+    }
+
     private RowMapper<HomePageResponse> homePageRowMapper() {
         return (resultSet, rowNumber) -> {
             int bookId = resultSet.getInt("book_id");
@@ -50,5 +90,9 @@ public class BookStoreService {
         return list.stream()
                 .collect(Collectors.joining(","));
 
+    }
+
+    private List<String> csvToList(String string) {
+        return Arrays.stream(string.split(",")).toList();
     }
 }

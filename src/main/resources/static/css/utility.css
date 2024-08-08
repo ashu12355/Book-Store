@@ -3,3 +3,27 @@
   align-items: center;
   gap: 1rem;
 }
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+.text-light-blue {
+  color: #510da9;
+}
+.text-justify {
+  text-align: justify;
+}
+.lh-2 {
+  line-height: 1.5rem;
+}

@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.ashu.book_store.model.BookStore;
 import com.ashu.book_store.service.BookStoreService;
 
@@ -27,7 +29,9 @@ public class BookStoreController {
     }
 
     @GetMapping("/details")
-    public String details() {
+    public String details(@RequestParam int id , Model model) {
+        var book = service.getBook(id);
+        model.addAttribute("book",book);
         return "book-details";
     }
 
