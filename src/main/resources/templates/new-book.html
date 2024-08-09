@@ -11,12 +11,13 @@
         <nav data-th-replace="~{fragment :: nav('/home' , 'Back to Home')}"></nav>
 
         <section>
-            <form action="/create-book" method="post">
+            <form action="/create-book" method="post" enctype="multipart/form-data">
                 <div class="inputs-container">
                     <div>
                         <label for="book-name">Book Name</label>
                         <input type="text" id="book-name" name="bookName" class="input-field"
-                            placeholder="Ex : Java For Beggieers">
+                            placeholder="Ex : Java For Beginners
+                            ">
                     </div>
                     <div>
                         <label for="book-author">Book Author</label>

@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-
 import com.ashu.book_store.dto.BookDetailsResponse;
 import com.ashu.book_store.dto.HomePageResponse;
 import com.ashu.book_store.model.BookFormat;
@@ -23,10 +22,10 @@ import lombok.RequiredArgsConstructor;
 public class BookStoreService {
     private final JdbcTemplate jdbcTemplate;
 
-    public void createBook(BookStore bookStore) {
+    public void createBook(BookStore bookStore, String filePath) {
         String sql = """
                 INSERT INTO book_store (
-                    book_name ,author_name ,total_page ,publication_date ,book_format ,category,availabilty,book_description ) VALUES (?,?,?,?,?,?,?,?)
+                    book_name ,author_name ,total_page ,publication_date ,book_format ,category,availabilty,book_description,image) VALUES (?,?,?,?,?,?,?,?,?)
                     """;
         jdbcTemplate.update(sql,
                 bookStore.getBookName(),
@@ -36,7 +35,13 @@ public class BookStoreService {
                 bookStore.getBookFormat().name(),
                 bookStore.getCategory(),
                 listToCSV(bookStore.getAvailability()),
-                bookStore.getDescription());
+                bookStore.getDescription(),
+               filePath);
+    }
+    public String findImageById(int id) {
+       String sql = "SELECT image FROM book_store WHERE book_id = ?";
+       RowMapper<String> rowMapper = (resultSet,rn)-> resultSet.getString("image");
+       return jdbcTemplate.queryForObject(sql, rowMapper,id);
     }
 
     public List<HomePageResponse> getBooksNameandId() {
@@ -95,4 +100,9 @@ public class BookStoreService {
     private List<String> csvToList(String string) {
         return Arrays.stream(string.split(",")).toList();
     }
+
+   
+   
+
+    
 }

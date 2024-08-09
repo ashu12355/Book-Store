@@ -14,3 +14,8 @@ article img {
   padding: 0.5rem 2rem;
   border-radius: 1000px;
 }
+@media (max-width:600px) {
+  article {
+    grid-template-columns: 1fr;
+  }
+}
