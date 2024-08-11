@@ -11,48 +11,59 @@
         <nav data-th-replace="~{fragment :: nav('/home' , 'Back to Home')}"></nav>
 
         <section>
-            <form action="/create-book" method="post" enctype="multipart/form-data">
-                <div class="inputs-container">
+            <form action="/create-update-book" method="post" enctype="multipart/form-data">
+                <div class="inputs-container" data-th-object="${book}">
                     <div>
                         <label for="book-name">Book Name</label>
-                        <input type="text" id="book-name" name="bookName" class="input-field"
-                            placeholder="Ex : Java For Beginners
-                            ">
+                        <input type="text" id="book-name" name="bookName" 
+                               placeholder="Ex : Java For Beginners"
+                               class="input-field"
+                               data-th-field="*{bookName}">
                     </div>
+                    
                     <div>
                         <label for="book-author">Book Author</label>
                         <input type="text" id="book-author" class="input-field" name="authorName"
-                            placeholder="Ex : Cracking In Coding Interview">
+                            placeholder="Ex : Cracking In Coding Interview"
+                            data-th-field="*{authorName}"
+                            >
                     </div>
                     <div>
                         <label for="total-page">Total Page</label>
                         <input type="number" id="total-page" name="totalPage" class="input-field"
-                            placeholder="Ex : 415">
+                            placeholder="Ex : 415"
+                            data-th-field="*{totalPage}"
+                            >
                     </div>
                     <div>
                         <label for="publication-date">Publication Date</label>
-                        <input type="date" id="publication-date" class="input-field" name="publicationDate">
+                        <input type="date"
+                        id="publication-date" 
+                        class="input-field" 
+                        name="publicationDate"
+                        data-th-value="*{publicationDate}"
+                        >
                     </div>
                     <div class="flex-align-center-1">
                         <label for="paper-back">PaperBack</label>
-                        <input type="radio" name="bookFormat" id="paper-back" value="PAPERBACK">
+                        <input type="radio" name="bookFormat" id="paper-back" value="PAPERBACK"  data-th-field="*{bookFormat}">
 
                         <label for="hard-cover">HardCover</label>
-                        <input type="radio" name="bookFormat" id="hard-cover" value="HARDCOVER">
+                        <input type="radio" name="bookFormat" id="hard-cover" value="HARDCOVER"  data-th-field="*{bookFormat}">
                     </div>
 
                     <div class="flex-align-center-1">
                         <label for="amazon">Amazon</label>
-                        <input type="checkbox" id="amazon" name="availability" value="amazon">
+                        <input type="checkbox" id="amazon" name="availability" value="amazon" data-th-field="*{availability}">
                         <label for="flipkart">Flipkart</label>
-                        <input type="checkbox" id="flipkart" name="availability" value="flipkart">
+                        <input type="checkbox" id="flipkart" name="availability" value="flipkart" data-th-field="*{availability}">
                         <label for="offline">Offline Store</label>
-                        <input type="checkbox" id="offline" name="availability" value="offline">
+                        <input type="checkbox" id="offline" name="availability" value="offline" data-th-field="*{availability}">
                     </div>
                     <div>
 
                         <label for="book-category">Book Category</label>
-                        <select name="category" id="book-category" class="input-field">
+                        <select name="category" id="book-category" class="input-field"  data-th-field="*{category}">
                             <option value="sports">Sports</option>
                             <option value="fiction">Fiction</option>
                             <option value="non-fiction">Non-Fiction</option>
@@ -68,11 +79,17 @@
                     </div>
                     <div class="grid-full">
                         <label for="book-description">Book Description</label>
-                        <textarea rows="3" name="description" id="book-description" class="input-field"></textarea>
+                        <textarea rows="3" name="description" id="book-description" class="input-field"
+                        data-th-text="*{description}"
+                        ></textarea>
                     </div>
+
+                    <input type="hidden" name="bookId" data-th-field="*{bookId}">
                 </div>
                 <div class="submit-btn-container">
-                    <input type="submit">
+                    <input type="submit"
+                   
+                    >
                 </div>
             </form>
         </section>

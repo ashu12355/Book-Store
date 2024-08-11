@@ -27,3 +27,17 @@
 .lh-2 {
   line-height: 1.5rem;
 }
+.p-half {
+  padding: 0.5rem;
+}
+
+.link-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  text-decoration: underline;
+  color: #D0ADF0;
+  cursor: pointer;
+  font-family: "Lexend", sans-serif;
+  font-size: 15px;
+}

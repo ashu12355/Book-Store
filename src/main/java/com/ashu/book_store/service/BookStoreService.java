@@ -53,6 +53,36 @@ public class BookStoreService {
         String sql = "SELECT * FROM book_store WHERE book_id = ? ";
         return jdbcTemplate.queryForObject(sql, getBookDetailsRowMapper(), id);
     }
+    public void deleteBookById(int id) {
+        String sql = "DELETE FROM book_store WHERE book_id = ?";
+        jdbcTemplate.update(sql,id);
+     }
+
+     public void updateBook(int bookId, BookStore bookStore) {
+        String sql = """
+                UPDATE book_store SET 
+                    book_name = ?,
+                    author_name = ?,
+                    total_page = ?,
+                    publication_date = ?,
+                    book_format = ?,
+                    category = ?,
+                    availability = ?,
+                    book_description = ?
+                WHERE book_id = ?
+                """;
+        jdbcTemplate.update(sql,
+                bookStore.getBookName(),
+                bookStore.getAuthorName(),
+                bookStore.getTotalPage(),
+                bookStore.getPublicationDate(),
+                bookStore.getBookFormat().name(),
+                bookStore.getCategory(),
+                listToCSV(bookStore.getAvailability()),
+                bookStore.getDescription(),
+                bookId);
+    }
+    
 
     private RowMapper<BookDetailsResponse> getBookDetailsRowMapper() {
         return (resultSet, rowNumber) -> {
@@ -100,6 +130,8 @@ public class BookStoreService {
     private List<String> csvToList(String string) {
         return Arrays.stream(string.split(",")).toList();
     }
+    
+   
 
    
    

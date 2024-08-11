@@ -17,10 +17,18 @@
                     <h4 data-th-text="${book.bookName}"></h4>
                     <a data-th-href="|/details?id=${book.bookId}|">Read More</a>
                 </div>
+                <div class="card-footer flex-between p-half">
+                    <a data-th-href="|/update-book?id=${book.bookId}|">Edit</a>
+                    <!-- <a data-th-href="|/remove-book?id=${book.bookId}|">Remove</a>  -->
+
+                    <button type="button" class="link-btn" data-th-onclick="|onRemove(${book.bookId})|">Remove</button>
+
+                </div>
 
             </article>
         </section>
     </main>
+    <script src="/js/home.js"></script>
 </body>
 
 </html>
