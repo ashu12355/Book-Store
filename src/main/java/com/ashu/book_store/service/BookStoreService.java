@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ashu.book_store.dto.BookDetailsResponse;
 import com.ashu.book_store.dto.HomePageResponse;
 import com.ashu.book_store.model.BookFormat;
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BookStoreService {
     private final JdbcTemplate jdbcTemplate;
+    private final FileService fileService;
 
     public void createBook(BookStore bookStore, String filePath) {
         String sql = """
@@ -67,7 +70,7 @@ public class BookStoreService {
                     publication_date = ?,
                     book_format = ?,
                     category = ?,
-                    availability = ?,
+                    availabilty = ?,
                     book_description = ?
                 WHERE book_id = ?
                 """;
@@ -129,6 +132,18 @@ public class BookStoreService {
 
     private List<String> csvToList(String string) {
         return Arrays.stream(string.split(",")).toList();
+    }
+    public void updateImage(int bookId, MultipartFile bookImage) {
+        if(!bookImage.isEmpty()) {
+            try {
+                String path = fileService.uploadImage(bookImage);
+                String sql = "UPDATE book_store SET image = ? WHERE book_id = ?";
+                jdbcTemplate.update(sql,path,bookId);
+            } catch (Exception e) {
+               throw new RuntimeException();
+            }
+
+        }
     }
     
    

@@ -51,6 +51,7 @@ public class BookStoreController {
         }
         else {
             service.updateBook(bookId,bookStore);
+            service.updateImage(bookId,bookStore.getBookImage());
         }
         return "redirect:/home";
     }

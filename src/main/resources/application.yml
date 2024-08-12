@@ -1,0 +1,19 @@
+server:
+  port: 1200
+
+spring:
+  application:
+    name: "book-store"
+
+  datasource:
+    url: "jdbc:mysql://localhost/sb_july"
+    username: "root"
+    password: "root"
+
+logging:
+  level:
+    com.ashu.book_store.service: DEBUG
+
+upload:
+  file:
+    dir: "images"
