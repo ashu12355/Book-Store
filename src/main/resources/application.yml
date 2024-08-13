@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: "book-store"
+  profiles:
+    active: qa 
 
   datasource:
     url: "jdbc:mysql://localhost/sb_july"
