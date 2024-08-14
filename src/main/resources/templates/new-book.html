@@ -26,6 +26,7 @@
                         <input type="text" id="book-author" class="input-field" name="authorName"
                             placeholder="Ex : Cracking In Coding Interview"
                             data-th-field="*{authorName}"
+                            required
                             >
                     </div>
                     <div>
@@ -33,6 +34,7 @@
                         <input type="number" id="total-page" name="totalPage" class="input-field"
                             placeholder="Ex : 415"
                             data-th-field="*{totalPage}"
+                            required
                             >
                     </div>
                     <div>
@@ -81,6 +83,7 @@
                         <label for="book-description">Book Description</label>
                         <textarea rows="3" name="description" id="book-description" class="input-field"
                         data-th-text="*{description}"
+                        required
                         ></textarea>
                     </div>
 
